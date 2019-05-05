@@ -79,9 +79,11 @@ dist
 
 # IDE
 .idea
+.vscode
 
 # Service worker
 sw.*
 
 # Firebase
 .firebaserc
+.firebase/
