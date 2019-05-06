@@ -1,17 +1,13 @@
 <template>
   <div>
     <nav
-      class="navbar header has-shadow is-primary"
+      class="navbar header is-spaced has-shadow is-primary"
       role="navigation"
       aria-label="main navigation"
     >
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <img
-            src="~assets/pelicula_logo_white.png"
-            alt="Película"
-            height="28"
-          />
+          <img src="~assets/pelicula_logo_white.png" alt="Película" />
         </a>
 
         <div class="navbar-burger">
