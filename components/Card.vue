@@ -16,13 +16,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    title: {
-      type: String,
-      required: true
-    }
-  }
-};
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator';
+
+@Component
+export default class Card extends Vue {
+  @Prop() title;
+}
 </script>

@@ -71,14 +71,13 @@
 }
 </style>
 
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
-  name: '',
   layout: 'landing'
 })
-export default class HomePage extends Vue {
+export default class extends Vue {
   goToApp() {
     this.$router.push({ name: 'overview' });
   }

@@ -11,13 +11,15 @@
 <style lang="scss"></style>
 
 <script>
+import { Component, Vue } from 'vue-property-decorator';
 import Card from '~/components/Card';
 import SearchBar from '~/components/SearchBar';
 
-export default {
+@Component({
   components: {
     Card,
     SearchBar
   }
-};
+})
+export default class Overview extends Vue {}
 </script>

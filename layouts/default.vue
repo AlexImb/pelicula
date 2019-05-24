@@ -18,23 +18,22 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      items: [
-        {
-          title: 'Home',
-          icon: 'home',
-          to: { name: 'index' }
-        },
-        {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' }
-        }
-      ]
-    };
-  }
-};
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class extends Vue {
+  items = [
+    {
+      title: 'Home',
+      icon: 'home',
+      to: { name: 'index' }
+    },
+    {
+      title: 'Inspire',
+      icon: 'lightbulb',
+      to: { name: 'inspire' }
+    }
+  ];
+}
 </script>
