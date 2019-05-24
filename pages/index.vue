@@ -9,7 +9,7 @@
             <a class="navbar-item">
               <img src="~assets/pelicula_logo_white.png" alt="Película" />
             </a>
-          </div> -->
+            </div>-->
           </div>
         </header>
       </div>
@@ -18,16 +18,10 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title">
-            <img
-              class="hero__logo"
-              src="~assets/pelicula_logo_white.png"
-              alt="Película"
-            />
+            <img class="hero__logo" src="~assets/pelicula_logo_white.png" alt="Película" />
           </h1>
           <h2 class="subtitle">
-            <b-button class="is-large hero__btn" inverted @click="goToApp"
-              >CREATE A MOVIE NIGHT</b-button
-            >
+            <b-button class="is-large hero__btn" inverted @click="goToApp">CREATE A MOVIE NIGHT</b-button>
           </h2>
         </div>
       </div>
@@ -45,7 +39,7 @@
             <li><a>Layout</a></li>
           </ul>
         </div>
-      </nav> -->
+        </nav>-->
       </div>
     </section>
   </main>
@@ -78,13 +72,15 @@
 </style>
 
 <script>
-export default {
-  name: 'HomePage',
-  layout: 'landing',
-  methods: {
-    goToApp() {
-      this.$router.push({ name: 'overview' })
-    }
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({
+  name: '',
+  layout: 'landing'
+})
+export default class HomePage extends Vue {
+  goToApp() {
+    this.$router.push({ name: 'overview' });
   }
 }
 </script>

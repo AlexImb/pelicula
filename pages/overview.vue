@@ -11,13 +11,13 @@
 <style lang="scss"></style>
 
 <script>
-import Card from '~/components/Card'
-import SearchBar from '~/components/SearchBar'
+import Card from '~/components/Card';
+import SearchBar from '~/components/SearchBar';
 
 export default {
   components: {
     Card,
     SearchBar
   }
-}
+};
 </script>

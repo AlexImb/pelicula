@@ -1,6 +1,6 @@
-import pkg from './package'
+import NuxtConfiguration from '@nuxt/config';
 
-export default {
+const config: NuxtConfiguration = {
   mode: 'universal',
 
   /*
@@ -11,7 +11,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'The ultimate PWA for movie night polls.'
+      }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
@@ -29,7 +33,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/firebase.js' }],
+  plugins: [{ src: '~/plugins/firebase.ts' }, { src: '~/plugins/firestore.ts' }],
 
   /*
    ** Nuxt.js modules
@@ -51,31 +55,29 @@ export default {
   },
 
   env: {
-    FIREBASE_CLIENT_API_KEY: process.env.FIREBASE_CLIENT_API_KEY,
-    FIREBASE_CLIENT_AUTH_DOMAIN: process.env.FIREBASE_CLIENT_AUTH_DOMAIN,
-    FIREBASE_CLIENT_DATABASE_URL: process.env.FIREBASE_CLIENT_DATABASE_URL,
-    FIREBASE_CLIENT_PROJECT_ID: process.env.FIREBASE_CLIENT_PROJECT_ID,
-    FIREBASE_CLIENT_STORAGE_BUCKET: process.env.FIREBASE_CLIENT_STORAGE_BUCKET,
-    TMDB_API_KEY: process.env.TMDB_API_KEY
+    FIREBASE_CLIENT_API_KEY: process.env.FIREBASE_CLIENT_API_KEY || '',
+    FIREBASE_CLIENT_AUTH_DOMAIN: process.env.FIREBASE_CLIENT_AUTH_DOMAIN || '',
+    FIREBASE_CLIENT_DATABASE_URL: process.env.FIREBASE_CLIENT_DATABASE_URL || '',
+    FIREBASE_CLIENT_PROJECT_ID: process.env.FIREBASE_CLIENT_PROJECT_ID || '',
+    FIREBASE_CLIENT_STORAGE_BUCKET: process.env.FIREBASE_CLIENT_STORAGE_BUCKET || '',
+    TMDB_API_KEY: process.env.TMDB_API_KEY || ''
   },
 
   /*
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     extend(config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
+      if (ctx.isDev && ctx.isClient && config && config.module) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        })
+        });
       }
     }
   }
-}
+};
+
+export default config;
