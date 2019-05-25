@@ -79,7 +79,7 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class extends Vue {
   goToApp() {
-    this.$router.push({ name: 'overview' });
+    this.$router.push('login');
   }
 }
 </script>

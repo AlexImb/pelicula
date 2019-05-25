@@ -1,7 +1,7 @@
 import NuxtConfiguration from '@nuxt/config';
 
 const config: NuxtConfiguration = {
-  mode: 'universal',
+  mode: 'spa',
 
   /*
    ** Headers of the page
@@ -21,6 +21,13 @@ const config: NuxtConfiguration = {
   },
 
   /*
+   *  Router middleware for routes access control
+   */
+  router: {
+    middleware: 'router-auth'
+  },
+
+  /*
    ** Customize the progress-bar color
    */
   loading: { color: '#7957d5' },
@@ -33,7 +40,7 @@ const config: NuxtConfiguration = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/firebase.ts' }, { src: '~/plugins/firestore.ts' }],
+  plugins: [{ src: '~/plugins/firebase.ts' }, { src: '~/plugins/firestore.ts' }, { src: '~/plugins/fireauth.ts' }],
 
   /*
    ** Nuxt.js modules
@@ -67,16 +74,16 @@ const config: NuxtConfiguration = {
    ** Build configuration
    */
   build: {
-    extend(config, ctx) {
-      if (ctx.isDev && ctx.isClient && config && config.module) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        });
-      }
-    }
+    // extend(config, ctx) {
+    //   if (ctx.isDev && ctx.isClient && config && config.module) {
+    //     config.module.rules.push({
+    //       enforce: 'pre',
+    //       test: /\.(js|vue)$/,
+    //       loader: 'eslint-loader',
+    //       exclude: /(node_modules)/
+    //     });
+    //   }
+    // }
   }
 };
 
