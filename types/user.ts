@@ -7,4 +7,5 @@ export interface User {
   providerId: string;
   emailVerified: boolean;
   isAnonymous: boolean;
+  isAdmin: boolean;
 }

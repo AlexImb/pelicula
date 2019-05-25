@@ -6,33 +6,35 @@
           <nuxt-link class="navbar-item" to="/overview">
             <img src="~assets/pelicula_logo_white.png" alt="Película" />
           </nuxt-link>
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            :class="{ 'is-active': activeMenu }"
+            @click="activeMenu = !activeMenu"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-        <div class="navbar-menu">
+        <div class="navbar-menu" :class="{ 'is-active': activeMenu }">
           <div class="navbar-end">
             <div v-if="user" class="navbar-item">
               <nuxt-link to="/overview" class="navbar-link__text">Overview</nuxt-link>
             </div>
-            <div v-if="user" class="navbar-item">
+            <div v-if="user && user.isAdmin" class="navbar-item">
               <nuxt-link to="/admin" class="navbar-link__text">Admin</nuxt-link>
             </div>
-            <div v-else class="navbar-item">
-              <nuxt-link to="/login" class="navbar-link__text">Login</nuxt-link>
-            </div>
-
-            <!-- <div v-if="user" class="navbar-item">
-              <nuxt-link to="/profile" class="navbar-link__text">{{ user.displayName }}</nuxt-link>
-            </div> -->
-
             <b-dropdown v-if="user" position="is-bottom-left" aria-role="menu">
               <a slot="trigger" class="navbar-item" role="button">
                 <img :src="user.photoURL" />
-                <b-icon icon="menu-down"></b-icon>
+                <b-icon icon="menu-down mdi-light"></b-icon>
               </a>
-
               <b-dropdown-item custom aria-role="menuitem">
                 Logged as <b>{{ user.displayName }}</b>
               </b-dropdown-item>
-
               <b-dropdown-item value="settings" @click="goToProfile()">
                 <b-icon icon="settings"></b-icon>
                 Settings
@@ -42,6 +44,9 @@
                 Logout
               </b-dropdown-item>
             </b-dropdown>
+            <div v-else class="navbar-item">
+              <nuxt-link to="/login" class="navbar-link__text">Login</nuxt-link>
+            </div>
           </div>
         </div>
       </div>
@@ -56,8 +61,16 @@
 </template>
 
 <style lang="scss" scoped>
-.navbar-link__text {
-  color: white;
+.navbar-menu {
+  .navbar-link__text {
+    color: white;
+  }
+
+  &.is-active {
+    .navbar-link__text {
+      color: blueviolet;
+    }
+  }
 }
 </style>
 
@@ -66,6 +79,8 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class extends Vue {
+  activeMenu = false;
+
   get user() {
     return this.$store.state.auth.user;
   }
