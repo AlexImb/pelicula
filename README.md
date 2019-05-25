@@ -13,6 +13,7 @@ Perfect for tech startups who organize movie nights with the collegues. The open
 
 The initial version will use Firebase as the realtime backend provider, but with the community help it can be backend agnostic in the future.
 
+
 ## La Película 
 
 SaaS offering hosted by us featuring recurrent movie nights, API integrations and AI-augmented suggestions based on previous choices, genres and critic scores.
@@ -25,6 +26,13 @@ SaaS offering hosted by us featuring recurrent movie nights, API integrations an
 - [ ] Backed by and hosted on: [Firebase](https://firebase.google.com/): authentication, Firestore realtime DB and CDN
 - [ ] Backend agnostic: remove the usage of Firebase constraint and allow other realtime (deepstreamHub, Sockets.IO) and non-realtime (REST APIs, GraphQL) data sources
 
+## Firebase Setup
+
+1. Create a new project on Firebase [Firebase](https://firebase.google.com/).
+2. Enable Authentication, Cloud Firestore, Hosting.
+3. Copy the `.env.example` to a `.env` file.
+4. Fill in the environmental variables with your own.
+5. Build and deploy the project.
 
 ## Build Setup
 
