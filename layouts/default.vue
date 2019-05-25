@@ -39,13 +39,13 @@
                 <b-icon icon="settings"></b-icon>
                 Settings
               </b-dropdown-item>
-              <b-dropdown-item value="logout" aria-role="menuitem" @click="logout()">
+              <b-dropdown-item value="logout" aria-role="menuitem" @click="signOut()">
                 <b-icon icon="logout"></b-icon>
-                Logout
+                Sign Out
               </b-dropdown-item>
             </b-dropdown>
             <div v-else class="navbar-item">
-              <nuxt-link to="/login" class="navbar-link__text">Login</nuxt-link>
+              <nuxt-link to="/login" class="navbar-link__text">Sign In</nuxt-link>
             </div>
           </div>
         </div>
@@ -89,12 +89,12 @@ export default class extends Vue {
     this.$router.push('profile');
   }
 
-  async logout() {
+  async signOut() {
     try {
       await this.$store.dispatch('auth/signOut');
       this.$router.replace('about');
     } catch (error) {
-      console.log('Logout error', error);
+      console.log('Sign Out error', error);
     }
   }
 }
