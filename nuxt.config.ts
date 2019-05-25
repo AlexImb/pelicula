@@ -35,7 +35,7 @@ const config: NuxtConfiguration = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['./assets/theme.scss'],
 
   /*
    ** Plugins to load before mounting the App
@@ -52,7 +52,9 @@ const config: NuxtConfiguration = {
     '@nuxtjs/axios',
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    // Doc: https://vue-scrollto.netlify.com/docs
+    'vue-scrollto/nuxt'
   ],
   /*
    ** Axios module configuration

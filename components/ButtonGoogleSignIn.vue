@@ -35,7 +35,6 @@
   color: #737373;
   border-radius: 5px;
   white-space: nowrap;
-  // box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.07);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   transition-property: background-color, box-shadow;
   transition-duration: 150ms;
