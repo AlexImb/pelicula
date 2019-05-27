@@ -90,7 +90,7 @@
 </template>
 
 <style lang="scss">
-@import '~/assets/gradients.scss';
+@import '~/assets/scss/gradients.scss';
 .hero {
   background-image: url('../assets/landing-0.jpeg');
   background-size: cover;
