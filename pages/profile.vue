@@ -18,6 +18,14 @@
         </b-field>
       </card>
     </div>
+
+    <div class="columns is-mobile">
+      <div class="column">
+        <b-button type="is-danger" icon-left="delete" @click="openDeleteAccountDialog()">
+          Delete account
+        </b-button>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -35,6 +43,31 @@ import Card from '@/components/Card';
 export default class Overview extends Vue {
   get user() {
     return this.$store.state.auth.user;
+  }
+
+  openDeleteAccountDialog() {
+    this.$dialog.confirm({
+      title: 'Deleting account',
+      message: 'Are you sure you want to <b>delete</b> your account? This action cannot be undone.',
+      confirmText: 'Delete Account',
+      type: 'is-danger',
+      hasIcon: true,
+      onConfirm: () => this.deleteAccount()
+    });
+  }
+
+  async deleteAccount() {
+    // TODO: Add the account data deletion
+
+    this.$toast.open({
+      duration: 5000,
+      message: `Account deleted! Signing out...`,
+      position: 'is-bottom',
+      type: 'is-danger'
+    });
+
+    await this.$store.dispatch('auth/signOut');
+    this.$router.replace('about');
   }
 }
 </script>
