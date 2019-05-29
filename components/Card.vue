@@ -8,8 +8,6 @@
       </slot>
       <div class="card-content">
         <div class="content">
-          {{size}}
-          {{customClass}}
           <slot />
         </div>
       </div>
