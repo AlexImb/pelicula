@@ -52,11 +52,9 @@ const config: NuxtConfiguration = {
     '@nuxtjs/axios',
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/toast
-    '@nuxtjs/toast',
     '@nuxtjs/pwa',
     // Doc: https://vue-scrollto.netlify.com/docs
-    'vue-scrollto/nuxt',
+    'vue-scrollto/nuxt'
   ],
   /*
    ** Axios module configuration
