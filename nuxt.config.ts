@@ -76,16 +76,16 @@ const config: NuxtConfiguration = {
    ** Build configuration
    */
   build: {
-    // extend(config, ctx) {
-    //   if (ctx.isDev && ctx.isClient && config && config.module) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     });
-    //   }
-    // }
+    extend(config, ctx) {
+      if (ctx.isDev && ctx.isClient && config && config.module) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(ts|js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        });
+      }
+    }
   }
 };
 
