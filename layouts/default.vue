@@ -64,11 +64,19 @@
 .navbar-menu {
   .navbar-link__text {
     color: white;
+
+    &.nuxt-link-active {
+      font-weight: bold;
+    }
   }
 
   &.is-active {
     .navbar-link__text {
       color: blueviolet;
+
+      &.nuxt-link-active {
+        font-weight: bold;
+      }
     }
   }
 }
@@ -92,7 +100,7 @@ export default class extends Vue {
   async signOut() {
     try {
       await this.$store.dispatch('auth/signOut');
-      this.$router.replace('about');
+      this.$router.replace('/');
     } catch (error) {
       console.log('Sign Out error', error);
     }
