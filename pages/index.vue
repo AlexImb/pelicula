@@ -60,8 +60,8 @@
             <br />
             <p class="is-size-5">
               No matter how big is your team, it is always a challenge to pick the perfect movie for your next movie night.
-              Inspired by companies like Mozilla who have their own internal tools, we build an open-source PWA ready
-              to be used by everyone.
+              Inspired by companies like Mozilla who have their own internal tools, we build an open-source PWA ready to be used
+              by everyone.
             </p>
             <br />
             <br />
