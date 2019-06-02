@@ -1,17 +1,13 @@
 <template>
   <section>
-    <p class="content">
-      <b>Selected:</b>
-      {{ selected }}
-    </p>
-    <b-field label="Find a movie to propose">
+    <b-field label="Find a movie to suggest">
       <b-autocomplete
         :data="data"
         placeholder="e.g. Fight Club"
         field="title"
         :loading="isFetching"
         @typing="getAsyncData"
-        @select="option => (selected = option)"
+        @select="option => select(option)"
       >
         <template slot-scope="props">
           <div class="media">
@@ -34,12 +30,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 
 @Component
 export default class SearchBar extends Vue {
   data = [];
-  selected = null;
   isFetching = false;
 
   getAsyncData(name) {
@@ -61,6 +56,11 @@ export default class SearchBar extends Vue {
       .finally(() => {
         this.isFetching = false;
       });
+  }
+
+  @Emit()
+  select(selected) {
+    return selected;
   }
 }
 </script>
