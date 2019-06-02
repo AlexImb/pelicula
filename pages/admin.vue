@@ -31,9 +31,11 @@
           </b-collapse>
         </template>
 
-        <b-button class="m-t-lg" @click="addNew">Add new</b-button>
+        <br />
+        <b-button class="m-t-lg" @click="isEventModalActive = true">Add new</b-button>
       </card>
     </div>
+    <add-event-modal :is-active="isEventModalActive" @close="isEventModalActive = false" @save="saveEvent" />
   </section>
 </template>
 
@@ -43,17 +45,20 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Card from '@/components/Card.vue';
 import Calendar from '@/components/Calendar.vue';
+import AddEventModal from '@/components/AddEventModal.vue';
 import { Event } from '@/types/event';
 import { isSameDay } from '@/helpers/datetime';
 
 @Component({
   components: {
     Card,
-    Calendar
+    Calendar,
+    AddEventModal
   }
 })
 export default class Admin extends Vue {
   calendarDate: Date = new Date();
+  isEventModalActive = false;
 
   created() {
     this.$store.dispatch('events/getEvents');
@@ -71,10 +76,36 @@ export default class Admin extends Vue {
     return this.events.filter(event => isSameDay(event.date, this.calendarDate));
   }
 
-  addNew() {
-    this.$toast.open({
-      message: 'To be implemented'
-    });
+  saveEvent(event) {
+    return event.id ? this.updateEvent(event) : this.addNewEvent(event);
+  }
+
+  async addNewEvent(event) {
+    try {
+      await this.$store.dispatch('events/addEvent', { ...event, timestamp: this.calendarDate });
+      this.isEventModalActive = false;
+      this.$toast.open({
+        message: 'Event added'
+      });
+    } catch (e) {
+      this.$toast.open({
+        message: 'Error while adding event'
+      });
+    }
+  }
+
+  async updateEvent(event) {
+    try {
+      await this.$store.dispatch('events/updateEvent', event);
+      this.isEventModalActive = false;
+      this.$toast.open({
+        message: 'Event updated'
+      });
+    } catch (e) {
+      this.$toast.open({
+        message: 'Error while updating event'
+      });
+    }
   }
 
   deleteEvent(event) {

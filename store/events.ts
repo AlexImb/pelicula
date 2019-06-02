@@ -42,7 +42,17 @@ export const actions: ActionTree<State, State> = {
     commit('setEvents', events);
     commit('setLoading', false);
   },
-
+  async addEvent({ dispatch }, event) {
+    await firestore.collection('events').add(event);
+    dispatch('getEvents');
+  },
+  async updateEvent({ dispatch }, event) {
+    await firestore
+      .collection('events')
+      .doc(event.id)
+      .set(event);
+    dispatch('getEvents');
+  },
   async deleteEvent({ dispatch }, event) {
     await firestore
       .collection('events')
