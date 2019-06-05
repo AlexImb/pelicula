@@ -31,7 +31,10 @@ export const actions: ActionTree<State, State> = {
   async getEvents({ commit }) {
     commit('setLoading', true);
 
-    const eventsSnapshot: QuerySnapshot = await firestore.collection('events').get();
+    const eventsSnapshot: QuerySnapshot = await firestore
+      .collection('events')
+      .orderBy('timestamp')
+      .get();
     const events: Event[] = eventsSnapshot.docs.map((event: QueryDocumentSnapshot) => {
       const eventData: DocumentData = event.data();
       const timestamp: Timestamp = eventData.timestamp;
