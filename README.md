@@ -3,6 +3,7 @@
  > The ultimate PWA for movie night polls. 🍿
 
  [![Netlify Status](https://api.netlify.com/api/v1/badges/d5700271-4e53-4ded-8727-d3a895b12b17/deploy-status)](https://app.netlify.com/sites/pelicula/deploys)
+![GitHub](https://img.shields.io/github/license/aleximb/pelicula.svg?style=flat-square)
 
 
 Película is modern progressive web application aiming to simplify the process of selecting what film to watch during the next movie night with your friends.
