@@ -17,22 +17,28 @@
       </div>
 
       <div class="columns">
-        <card :title="event.date.toLocaleDateString()">
-          {{ event }}
-
-          {{ suggestions }}
+        <card :title="event.date.toLocaleDateString() + ' - ' + event.description">
+          <div v-if="!suggestions.length" class="has-text-centered">No suggestions for this event!</div>
+          <template v-else>
+            <suggestion-media-object
+              v-for="suggestion in suggestions"
+              :key="suggestion.id"
+              :suggestion="suggestion"
+              @suggest="suggest"
+            />
+          </template>
         </card>
       </div>
 
       <div class="columns is-mobile">
         <card title="Suggest a movie">
-          <suggestion-media-object
-            v-if="selectedSuggestion"
-            :suggestion="selectedSuggestion"
+          <preliminary-suggestion-media-object
+            v-if="selectedPreliminarySuggestion"
+            :suggestion-item="selectedPreliminarySuggestion"
             @suggest="suggest"
-            @cancel="selectedSuggestion = null"
+            @cancel="selectedPreliminarySuggestion = null"
           />
-          <search-bar @select="selected => (selectedSuggestion = selected)" />
+          <search-bar @select="selected => (selectedPreliminarySuggestion = selected)" />
         </card>
       </div>
     </template>
@@ -51,17 +57,19 @@ import firestore from '@/plugins/firestore';
 import { QuerySnapshot, QueryDocumentSnapshot } from '@firebase/firestore-types';
 import Card from '~/components/Card.vue';
 import SuggestionMediaObject from '~/components/SuggestionMediaObject.vue';
+import PreliminarySuggestionMediaObject from '~/components/PreliminarySuggestionMediaObject.vue';
 import SearchBar from '~/components/SearchBar.vue';
 
 @Component({
   components: {
     Card,
-    SearchBar,
-    SuggestionMediaObject
+    PreliminarySuggestionMediaObject,
+    SuggestionMediaObject,
+    SearchBar
   }
 })
 export default class Overview extends Vue {
-  selectedSuggestion = null;
+  selectedPreliminarySuggestion = null;
   event: Event = null;
   eventIndex: number = null;
   suggestions = [];
@@ -90,7 +98,7 @@ export default class Overview extends Vue {
         suggestions.forEach(async (suggestion: QueryDocumentSnapshot) => {
           const { suggestedItem, userReference, votes } = suggestion.data();
           const user = await userReference.get();
-          this.suggestions.push({ id: suggestion.id, suggestedItem, user: { id: user.id, ...user.data(), votes } });
+          this.suggestions.push({ id: suggestion.id, suggestedItem, user: { id: user.id, ...user.data() }, votes });
         });
       });
   }
@@ -122,7 +130,7 @@ export default class Overview extends Vue {
         votes: []
       });
       this.$toast.open({ message: 'Suggestion added' });
-      this.selectedSuggestion = null;
+      this.selectedPreliminarySuggestion = null;
     } catch (e) {
       this.$toast.open({ message: 'Error while adding the suggestion' });
       throw e;
