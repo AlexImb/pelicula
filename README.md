@@ -5,7 +5,7 @@
  [![Netlify Status](https://api.netlify.com/api/v1/badges/d5700271-4e53-4ded-8727-d3a895b12b17/deploy-status)](https://app.netlify.com/sites/pelicula/deploys)
 
 
-Película is modern progressive web application aiming to simplify the process of selecting what film to watch during your next movie night with your friends.
+Película is modern progressive web application aiming to simplify the process of selecting what film to watch during the next movie night with your friends.
 
 ## Self-Hosted
 
