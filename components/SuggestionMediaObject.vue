@@ -16,16 +16,33 @@
         </a>
 
         <div class="is-pulled-right">
+          <!-- TODO: Add round users avatars and name tooltips -->
+          <div v-if="suggestion.votes.length" class="votes__container"> {{ suggestion.votes.length }} votes</div>
           <transition name="fade">
-            <b-icon v-if="currentUserVoted()" type="is-danger" icon="heart" @click.native="$emit('unvote', suggestion)" />
-            <b-icon v-else icon="heart-outline" @click.native="$emit('vote', suggestion)" />
+            <span class="vote-icon-btn">
+              <b-icon v-if="currentUserVoted()" type="is-danger" icon="heart" @click.native="$emit('unvote', suggestion)" />
+              <b-icon v-else icon="heart-outline" @click.native="$emit('vote', suggestion)" />
+            </span>
           </transition>
-          <span v-if="suggestion.votes.length">{{ suggestion.votes.length }} votes</span>
         </div>
       </div>
     </div>
   </article>
 </template>
+
+<style lang="scss" scoped>
+.votes__container {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.vote-icon-btn {
+  position: relative;
+  top: 0.25rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+</style>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
@@ -35,7 +52,11 @@ export default class SuggestionMediaObject extends Vue {
   @Prop() suggestion;
 
   currentUserVoted() {
-    return false;
+    return this.suggestion.votes.findIndex(vote => vote.userId === this.user.uid) > -1;
+  }
+
+  get user() {
+    return this.$store.state.auth.user;
   }
 }
 </script>
