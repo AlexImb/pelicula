@@ -192,6 +192,18 @@ export default class Overview extends Vue {
     }
   }
 
+  async deleteSuggestion(suggestion) {
+    try {
+      await firestore
+        .collection(`events/${this.event.id}/suggestions`)
+        .doc(suggestion.id)
+        .delete();
+    } catch (e) {
+      this.$toast.open({ message: 'Error while deleting' });
+      throw e;
+    }
+  }
+
   get user() {
     return this.$store.state.auth.user;
   }

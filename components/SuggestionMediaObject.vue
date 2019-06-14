@@ -17,15 +17,18 @@
 
         <div class="is-pulled-right">
           <!-- TODO: Add round users avatars and name tooltips -->
-          <div v-if="suggestion.votes.length" class="votes__container"> {{ suggestion.votes.length }} votes</div>
+          <div v-if="suggestion.votes.length" class="votes__container">{{ suggestion.votes.length }} votes</div>
           <transition name="fade">
             <span class="vote-icon-btn">
-              <b-icon v-if="currentUserVoted()" type="is-danger" icon="heart" @click.native="$emit('unvote', suggestion)" />
+              <b-icon v-if="userVoted()" type="is-danger" icon="heart" @click.native="$emit('unvote', suggestion)" />
               <b-icon v-else icon="heart-outline" @click.native="$emit('vote', suggestion)" />
             </span>
           </transition>
         </div>
       </div>
+    </div>
+    <div class="media-right">
+      <button v-if="isUserSuggestion()" class="delete" @click="$emit('delete', suggestion)"></button>
     </div>
   </article>
 </template>
@@ -51,8 +54,12 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 export default class SuggestionMediaObject extends Vue {
   @Prop() suggestion;
 
-  currentUserVoted() {
+  userVoted() {
     return this.suggestion.votes.findIndex(vote => vote.userId === this.user.uid) > -1;
+  }
+
+  isUserSuggestion() {
+    return this.suggestion.user.id === this.user.uid;
   }
 
   get user() {
