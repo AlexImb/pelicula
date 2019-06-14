@@ -20,13 +20,16 @@
         <card :title="event.date.toLocaleDateString() + ' - ' + event.description">
           <div v-if="!suggestions.length" class="has-text-centered">No suggestions for this event!</div>
           <template v-else>
-            <suggestion-media-object
-              v-for="suggestion in suggestions"
-              :key="suggestion.id"
-              :suggestion="suggestion"
-              @vote="vote"
-              @unvote="unvote"
-            />
+            <transition-group name="list" tag="div">
+              <suggestion-media-object
+                v-for="suggestion in suggestions"
+                :key="suggestion.id"
+                :suggestion="suggestion"
+                @vote="vote"
+                @unvote="unvote"
+                @delete="deleteSuggestion"
+              />
+            </transition-group>
           </template>
         </card>
       </div>
@@ -49,13 +52,40 @@
   </section>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.list-enter-active,
+.list-leave-active,
+.list-move {
+  transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95);
+  transition-property: opacity, transform;
+}
+
+.list-enter {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.list-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.list-leave-active {
+  position: absolute;
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: center top;
+}
+</style>
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Event } from '@/types/event';
 import firestore from '@/plugins/firestore';
-import { QuerySnapshot, DocumentChange } from '@firebase/firestore-types';
+import { QuerySnapshot } from '@firebase/firestore-types';
 import Card from '~/components/Card.vue';
 import SuggestionMediaObject from '~/components/SuggestionMediaObject.vue';
 import PreliminarySuggestionMediaObject from '~/components/PreliminarySuggestionMediaObject.vue';
@@ -95,29 +125,22 @@ export default class Overview extends Vue {
     if (this.eventSuggestionsListener) this.eventSuggestionsListener();
     this.eventSuggestionsListener = firestore
       .collection(`events/${event.id}/suggestions`)
-      .orderBy('votes_count', 'desc')
-      .onSnapshot((suggestions: QuerySnapshot) => {
-        suggestions.docChanges().forEach(async (suggestionChange: DocumentChange) => {
-          console.log(suggestionChange);
-          const { suggestedItem, userReference, votes } = suggestionChange.doc.data();
+      .orderBy('votesCount', 'desc')
+      .orderBy('createdAt', 'asc')
+      .onSnapshot(async (suggestions: QuerySnapshot) => {
+        const suggestionsArr = [];
+        for (const suggestionDocument of suggestions.docs) {
+          const { suggestedItem, userReference, votes } = suggestionDocument.data();
           const user = await userReference.get();
-          const suggestion = { id: suggestionChange.doc.id, suggestedItem, user: { id: user.id, ...user.data() }, votes };
-          if (suggestionChange.type === 'added') {
-            this.suggestions.splice(suggestionChange.newIndex, 0, suggestion);
-          }
-          if (suggestionChange.type === 'modified') {
-            if (suggestionChange.oldIndex === suggestionChange.newIndex) {
-              this.$set(this.suggestions, suggestionChange.newIndex, suggestion);
-            } else {
-              this.suggestions.splice(suggestionChange.oldIndex, 1, this.suggestions[suggestionChange.newIndex]);
-              this.$set(this.suggestions, suggestionChange.newIndex, suggestion);
-            }
-          }
-
-          if (suggestionChange.type === 'removed') {
-            this.suggestions.splice(suggestionChange.oldIndex, 1);
-          }
-        });
+          const suggestion = {
+            id: suggestionDocument.id,
+            suggestedItem,
+            user: { id: user.id, ...user.data() },
+            votes
+          };
+          suggestionsArr.push(suggestion);
+        }
+        this.suggestions = suggestionsArr.sort();
       });
   }
 
@@ -143,12 +166,12 @@ export default class Overview extends Vue {
   async suggest(suggestion) {
     try {
       await firestore.collection(`events/${this.event.id}/suggestions`).add({
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         userReference: firestore.doc(`users/${this.user.uid}`),
         suggestedItem: suggestion,
-        votes_count: 0,
+        votesCount: 0,
         votes: []
       });
-      this.$toast.open({ message: 'Suggestion added' });
       this.selectedPreliminarySuggestion = null;
     } catch (e) {
       this.$toast.open({ message: 'Error while adding the suggestion' });
@@ -162,7 +185,7 @@ export default class Overview extends Vue {
         .collection(`events/${this.event.id}/suggestions`)
         .doc(suggestion.id)
         .update({
-          votes_count: firebase.firestore.FieldValue.increment(1),
+          votesCount: firebase.firestore.FieldValue.increment(1),
           votes: firebase.firestore.FieldValue.arrayUnion({
             userId: this.user.uid,
             userReference: firestore.doc(`users/${this.user.uid}`)
@@ -180,7 +203,7 @@ export default class Overview extends Vue {
         .collection(`events/${this.event.id}/suggestions`)
         .doc(suggestion.id)
         .update({
-          votes_count: firebase.firestore.FieldValue.increment(-1),
+          votesCount: firebase.firestore.FieldValue.increment(-1),
           votes: firebase.firestore.FieldValue.arrayRemove({
             userId: this.user.uid,
             userReference: firestore.doc(`users/${this.user.uid}`)
