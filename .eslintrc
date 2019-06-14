@@ -5,8 +5,7 @@
     "node": true
   },
   "parserOptions": {
-    "parser": "@typescript-eslint/parser",
-    "project": "./tsconfig.json"
+    "parser": "@typescript-eslint/parser"
   },
   "extends": [
     "@nuxtjs",
