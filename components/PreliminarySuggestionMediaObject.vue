@@ -20,7 +20,9 @@
           Find more
           <b-icon icon="open-in-new" size="is-small"> </b-icon>
         </a>
-        <b-button type="is-primary" class="is-pulled-right" @click="$emit('suggest', suggestionItem)">Suggest</b-button>
+        <b-button type="is-primary" class="is-pulled-right" :disabled="alreadySuggested" @click="$emit('suggest', suggestionItem)"
+          >Suggest</b-button
+        >
       </div>
     </div>
     <div class="media-right">
@@ -35,5 +37,6 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 @Component
 export default class PreliminarySuggestionMediaObject extends Vue {
   @Prop() suggestionItem;
+  @Prop() alreadySuggested;
 }
 </script>

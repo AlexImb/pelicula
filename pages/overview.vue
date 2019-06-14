@@ -39,6 +39,7 @@
           <preliminary-suggestion-media-object
             v-if="selectedPreliminarySuggestion"
             :suggestion-item="selectedPreliminarySuggestion"
+            :already-suggested="isAlreadySuggested(selectedPreliminarySuggestion)"
             @suggest="suggest"
             @cancel="selectedPreliminarySuggestion = null"
           />
@@ -161,6 +162,10 @@ export default class Overview extends Vue {
   nextEvent() {
     this.eventIndex = (this.eventIndex + 1) % this.events.length;
     this.event = this.events[this.eventIndex];
+  }
+
+  isAlreadySuggested(preliminarySuggestion) {
+    return !!this.suggestions.find(suggestion => suggestion.suggestedItem.id === preliminarySuggestion.id);
   }
 
   async suggest(suggestion) {
