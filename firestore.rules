@@ -1,9 +1,32 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth != null && request.auth.uid != null;
+    }
+
+    function isAdmin() {
+      return get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.role == 'admin'
+    }
+
     match /users/{userId} {
-      allow read, update, delete: if request.auth.uid == userId;
-      allow create: if request.auth.uid != null;
+      allow update, delete: if request.auth.uid == userId;
+      allow read, create: if isAuthenticated();
+    }
+
+    match /roles/{userId} {
+      allow read: if request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    match /events/{eventId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+
+      match /suggestions/{suggestionId} {
+        allow read, create, update: if isAuthenticated();
+        allow delete: if get(resource.data.userReference).data.uid == request.auth.uid;
+      }
     }
   }
 }
