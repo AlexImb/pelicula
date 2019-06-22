@@ -6,11 +6,11 @@
 ![GitHub](https://img.shields.io/github/license/aleximb/pelicula.svg?style=flat-square)
 
 
-Película is modern progressive web application aiming to simplify the process of selecting what film to watch during the next movie night with your friends.
+Película is modern progressive web application aiming to simplify the process of selecting what to watch during the next movie night with your friends.
 
 ## Self-Hosted
 
-Perfect for tech startups who organize movie nights with the collegues. The open source version can be hosted on-premises or public cloud/CDN providers like Firabase and Netlify for free.
+Perfect for tech startups who organize movie nights with the colleagues. The open source version can be hosted on-premises or public cloud/CDN providers like Firebase and Netlify for free.
 
 The initial version will use Firebase as the realtime backend provider, but with the community help it can be backend agnostic in the future.
 
