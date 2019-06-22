@@ -66,6 +66,16 @@
             <br />
             <br />
             <div class="has-text-centered">
+              <a
+                href="https://www.producthunt.com/posts/pelicula?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-pelicula"
+                target="_blank"
+                ><img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=159266&theme=light"
+                  alt="Película - Open source PWA for movie night polls. 🍿 | Product Hunt Embed"
+                  style="width: 250px; height: 54px;"
+                  width="250px"
+                  height="54px"
+              /></a>
               <b-button size="is-large" icon-right="github-circle" @click="goToRepo()">
                 View on GitHub
               </b-button>
