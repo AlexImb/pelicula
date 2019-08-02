@@ -19,8 +19,6 @@ The initial version will use Firebase as the realtime backend provider, but with
 
 SaaS offering hosted by us featuring recurrent movie nights, API integrations and AI-augmented suggestions based on previous choices, genres and critic scores.
 
-> 🏗Expected: August, 2019
-
 ## Features
 
 - [x] Based on [Nuxt](https://nuxtjs.org/): no need to eject, fully upgradable, modular and able to pre-render certain routes
