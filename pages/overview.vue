@@ -179,7 +179,7 @@ export default class Overview extends Vue {
       });
       this.selectedPreliminarySuggestion = null;
     } catch (e) {
-      this.$toast.open({ message: 'Error while adding the suggestion' });
+      this.$buefy.toast.open({ message: 'Error while adding the suggestion' });
       throw e;
     }
   }
@@ -197,7 +197,7 @@ export default class Overview extends Vue {
           })
         });
     } catch (e) {
-      this.$toast.open({ message: 'Error while voting' });
+      this.$buefy.toast.open({ message: 'Error while voting' });
       throw e;
     }
   }
@@ -215,7 +215,7 @@ export default class Overview extends Vue {
           })
         });
     } catch (e) {
-      this.$toast.open({ message: 'Error while unvoting' });
+      this.$buefy.toast.open({ message: 'Error while unvoting' });
       throw e;
     }
   }
@@ -227,7 +227,7 @@ export default class Overview extends Vue {
         .doc(suggestion.id)
         .delete();
     } catch (e) {
-      this.$toast.open({ message: 'Error while deleting' });
+      this.$buefy.toast.open({ message: 'Error while deleting' });
       throw e;
     }
   }

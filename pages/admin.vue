@@ -84,11 +84,11 @@ export default class Admin extends Vue {
     try {
       await this.$store.dispatch('events/addEvent', { ...event, timestamp: this.calendarDate });
       this.isEventModalActive = false;
-      this.$toast.open({
+      this.$buefy.toast.open({
         message: 'Event added'
       });
     } catch (e) {
-      this.$toast.open({
+      this.$buefy.toast.open({
         message: 'Error while adding event'
       });
     }
@@ -98,11 +98,11 @@ export default class Admin extends Vue {
     try {
       await this.$store.dispatch('events/updateEvent', event);
       this.isEventModalActive = false;
-      this.$toast.open({
+      this.$buefy.toast.open({
         message: 'Event updated'
       });
     } catch (e) {
-      this.$toast.open({
+      this.$buefy.toast.open({
         message: 'Error while updating event'
       });
     }

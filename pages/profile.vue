@@ -46,7 +46,7 @@ export default class Overview extends Vue {
   }
 
   openDeleteAccountDialog() {
-    this.$dialog.confirm({
+    this.$buefy.dialog.confirm({
       title: 'Deleting account',
       message: 'Are you sure you want to <b>delete</b> your account? This action cannot be undone.',
       confirmText: 'Delete Account',
@@ -59,7 +59,7 @@ export default class Overview extends Vue {
   async deleteAccount() {
     // TODO: Add the account data deletion
 
-    this.$toast.open({
+    this.$buefy.toast.open({
       duration: 5000,
       message: `Account deleted! Signing out...`,
       position: 'is-bottom',
