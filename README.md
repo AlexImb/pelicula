@@ -5,7 +5,6 @@
  [![Netlify Status](https://api.netlify.com/api/v1/badges/d5700271-4e53-4ded-8727-d3a895b12b17/deploy-status)](https://app.netlify.com/sites/pelicula/deploys)
 ![GitHub](https://img.shields.io/github/license/aleximb/pelicula.svg?style=flat-square)
 
-
 Película is modern progressive web application aiming to simplify the process of selecting what to watch during the next movie night with your friends.
 
 ## Self-Hosted
@@ -28,12 +27,21 @@ SaaS offering hosted by us featuring recurrent movie nights, API integrations an
 ## Firebase Setup
 
 1. Create a new project on Firebase [Firebase](https://firebase.google.com/).
-2. Enable Authentication, Cloud Firestore, Hosting.
+2. Enable Authentication, Cloud Firestore, and Hosting.
 3. Copy the `.env.example` to a `.env` file.
 4. Fill in the environmental variables with your own.
 5. Build and deploy the project.
 
-## Build Setup
+## Netlify Setup
+
+1. Press this button: 
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/AlexImb/pelicula)
+
+2. Add the environmental variables from `.env.example` to your Netlify site dashboard under *Settings > Build & deploy > Environment > Environment variables*
+
+
+## Local Development Setup
 
 ``` bash
 # install dependencies
