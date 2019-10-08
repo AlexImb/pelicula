@@ -18,7 +18,7 @@
     "@nuxtjs/axios": "^5.6.0",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^2.6.0",
-    "cross-env": "^6.0.2",
+    "cross-env": "^6.0.3",
     "firebase": "^7.1.0",
     "nuxt": "^2.8.1",
     "nuxt-buefy": "^0.3.16",
