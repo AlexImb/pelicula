@@ -51,7 +51,7 @@
     "prettier": "^1.18.2",
     "sass-loader": "^8.0.0",
     "vue-jest": "^3.0.5",
-    "vue-property-decorator": "^8.2.2",
+    "vue-property-decorator": "^8.3.0",
     "vuex-class": "^0.3.2"
   }
 }
