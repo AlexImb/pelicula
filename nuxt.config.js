@@ -1,8 +1,13 @@
-import NuxtConfiguration from '@nuxt/config';
-
-const config: NuxtConfiguration = {
+const config = {
+  buildModules: [
+    [
+      '@nuxt/typescript-build',
+      {
+        typeCheck: true
+      }
+    ]
+  ],
   mode: 'spa',
-
   /*
    ** Headers of the page
    */
@@ -70,22 +75,6 @@ const config: NuxtConfiguration = {
     FIREBASE_CLIENT_PROJECT_ID: process.env.FIREBASE_CLIENT_PROJECT_ID || '',
     FIREBASE_CLIENT_STORAGE_BUCKET: process.env.FIREBASE_CLIENT_STORAGE_BUCKET || '',
     TMDB_API_KEY: process.env.TMDB_API_KEY || ''
-  },
-
-  /*
-   ** Build configuration
-   */
-  build: {
-    // extend(config, ctx) {
-    //   if (ctx.isDev && ctx.isClient && config && config.module) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     });
-    //   }
-    // }
   }
 };
 
