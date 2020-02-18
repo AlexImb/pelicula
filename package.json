@@ -28,7 +28,7 @@
   "devDependencies": {
     "@nuxt/typescript-build": "^0.5.6",
     "@nuxtjs/eslint-config": "^2.0.2",
-    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
     "@vue/test-utils": "^1.0.0-beta.31",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
