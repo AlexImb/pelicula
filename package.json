@@ -48,7 +48,7 @@
     "jest": "^25.1.0",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.2",
-    "prettier": "^2.0.1",
+    "prettier": "^2.0.2",
     "sass-loader": "^8.0.2",
     "vue-jest": "^3.0.5",
     "vue-property-decorator": "^8.4.1",
