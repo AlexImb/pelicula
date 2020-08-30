@@ -20,7 +20,7 @@
     "@nuxtjs/pwa": "^3.0.1",
     "cross-env": "^7.0.2",
     "firebase": "^7.14.2",
-    "nuxt": "^2.14.3",
+    "nuxt": "^2.14.4",
     "nuxt-buefy": "^0.4.2",
     "ts-node": "^8.10.2",
     "vue-scrollto": "^2.18.2"
