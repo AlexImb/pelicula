@@ -21,7 +21,7 @@
     "cross-env": "^7.0.2",
     "firebase": "^7.14.2",
     "nuxt": "^2.14.4",
-    "nuxt-buefy": "^0.4.2",
+    "nuxt-buefy": "^0.4.3",
     "ts-node": "^9.0.0",
     "vue-scrollto": "^2.18.2"
   },
