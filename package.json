@@ -22,7 +22,7 @@
     "firebase": "^7.14.2",
     "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.4.4",
-    "ts-node": "^9.0.0",
+    "ts-node": "^9.1.1",
     "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
