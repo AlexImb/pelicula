@@ -19,7 +19,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.3.5",
     "cross-env": "^7.0.3",
-    "firebase": "^7.14.2",
+    "firebase": "^8.4.3",
     "nuxt": "^2.15.4",
     "nuxt-buefy": "^0.4.4",
     "ts-node": "^9.1.1",
