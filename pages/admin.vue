@@ -22,7 +22,7 @@
               </div>
             </div>
             <footer class="card-footer">
-              <a class="card-footer-item">Edit</a>
+              <a class="card-footer-item" @click="openEditModal(event)">Edit</a>
               <a class="card-footer-item">Cancel</a>
               <a class="card-footer-item has-text-danger" @click="deleteEvent(event)">Delete</a>
             </footer>
@@ -30,10 +30,10 @@
         </template>
 
         <br />
-        <b-button class="m-t-lg" @click="isEventModalActive = true">Add new</b-button>
+        <b-button class="m-t-lg" @click="openAddModal">Add new</b-button>
       </card>
     </div>
-    <add-event-modal :is-active="isEventModalActive" @close="isEventModalActive = false" @save="saveEvent" />
+    <add-event-modal :is-active="isEventModalActive" :event="editingEvent" @close="closeModal" @save="saveEvent" />
   </section>
 </template>
 
@@ -55,6 +55,7 @@ import { isSameDay } from '@/helpers/datetime';
 export default class Admin extends Vue {
   calendarDate: Date = new Date();
   isEventModalActive = false;
+  editingEvent: Event | null = null;
 
   created() {
     this.$store.dispatch('events/getEvents');
@@ -106,6 +107,21 @@ export default class Admin extends Vue {
 
   deleteEvent(event) {
     this.$store.dispatch('events/deleteEvent', event);
+  }
+
+  openEditModal(event: Event) {
+    this.editingEvent = event;
+    this.isEventModalActive = true;
+  }
+
+  openAddModal() {
+    this.editingEvent = null;
+    this.isEventModalActive = true;
+  }
+
+  closeModal() {
+    this.isEventModalActive = false;
+    this.editingEvent = null;
   }
 }
 </script>
